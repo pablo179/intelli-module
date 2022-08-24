@@ -7,8 +7,12 @@ module.exports = {
     },
     extends: [
         'airbnb-base',
+        'prettier',
         'plugin:jest/recommended',
         'plugin:prettier/recommended',
+        'plugin:import/recommended',
+        'plugin:import/typescript',
+        'plugin:jest/recommended',
     ],
     parserOptions: {
         ecmaVersion: 'latest',

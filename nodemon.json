@@ -1,0 +1,5 @@
+{
+    "watch": ["samples/", "src/"],
+    "ext": ".ts,.js",
+    "ignore": ["src/tests/"]
+}

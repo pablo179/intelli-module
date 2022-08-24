@@ -1,9 +1,7 @@
-# Dependencies
 node_modules
-
-# yarn error logs
 yarn-error.log
-
-# Environment varibales
+/package-lock.json
+/yarn.lock
 .env
 docs
+lib

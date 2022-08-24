@@ -1,52 +1,59 @@
 {
     "author": {
-        "name": "Pablo David C",
+        "name": "Pablo David Castillo",
         "email": "cm.pablo.prog@gmail.com",
         "url": "https://pablo179.github.io/myResume/"
     },
     "bugs": {
-        "url": "https://github.com/pablo179/service-boilerplate/issues"
+        "url": "https://github.com/pablo179/intelli-module/issues"
     },
-    "dependencies": {
-        "dotenv": "^16.0.1",
-        "express": "^4.18.1",
-        "http-status": "^1.5.2",
-        "swagger-jsdoc": "^6.2.1",
-        "swagger-ui-express": "^4.4.0"
-    },
-    "description": "This is a bolierplate to create a new express app",
+    "description": "This is an intelligent module based on backpack algorithm and genetic algorithm",
     "devDependencies": {
-        "eslint": "^8.17.0",
+        "@typescript-eslint/eslint-plugin": "^5.34.0",
+        "@typescript-eslint/parser": "^5.34.0",
+        "eslint": "^8.22.0",
         "eslint-config-airbnb": "^19.0.4",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-import": "^2.26.0",
         "eslint-plugin-jest": "^26.5.3",
         "eslint-plugin-prettier": "^4.0.0",
-        "jest": "^28.1.1",
-        "node-mocks-http": "^1.11.0",
         "nodemon": "^2.0.16",
         "prettier": "^2.7.1",
-        "supertest": "^6.2.3"
+        "standard-version": "^9.5.0",
+        "supertest": "^6.2.3",
+        "tslint": "^6.1.3",
+        "typescript": "^4.7.4"
     },
-    "homepage": "https://github.com/pablo179/service-boilerplate#readme",
+    "homepage": "https://github.com/pablo179/intelli-module#readme",
     "keywords": [
-        "express",
-        "RESTapi",
         "eslint",
         "jest",
-        "prettier"
+        "prettier",
+        "backpack",
+        "genetic"
     ],
     "license": "ISC",
-    "main": "index.js",
-    "name": "service-boilerplate",
+    "main": "lib/app.js",
+    "name": "intelli-module",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pablo179/intelli-module"
+    },
     "scripts": {
-        "start": "node app/index.js",
-        "dev": "nodemon app/index.js",
+        "build": "tsc",
+        "dev": "nodemon --exec 'npm run build && node samples'",
+        "pretest": "npm run build",
         "test": "npx jest -i --colors --verbose --detectOpenHandles",
-        "test:watch": "npx jest -i --watchAll",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "prettier": "prettier --write ."
+        "prettier": "prettier --write .",
+        "release": "standard-version",
+        "release:minor": "standard-version --release-as minor",
+        "release:patch": "standard-version --release-as patch",
+        "release:major": "standard-version --release-as major"
     },
-    "version": "1.0.0"
+    "version": "0.0.1",
+    "dependencies": {
+        "dotenv": "^16.0.1"
+    }
 }
