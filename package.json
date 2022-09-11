@@ -52,7 +52,7 @@
         "release:patch": "standard-version --release-as patch",
         "release:major": "standard-version --release-as major"
     },
-    "version": "0.0.1",
+    "version": "0.0.2",
     "dependencies": {
         "dotenv": "^16.0.1"
     }
