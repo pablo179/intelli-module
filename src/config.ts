@@ -13,7 +13,7 @@ const getEnvVar = (value: string, required = true) => {
 
 const appConfig = {
     env: getEnvVar('NODE_ENV'),
-    populationLimit: 50,
+    populationLimit: 10,
     generationLimit: 3,
 }
 
