@@ -9,6 +9,7 @@
     },
     "description": "This is an intelligent module based on backpack algorithm and genetic algorithm",
     "devDependencies": {
+        "@types/node": "^18.7.16",
         "@typescript-eslint/eslint-plugin": "^5.34.0",
         "@typescript-eslint/parser": "^5.34.0",
         "eslint": "^8.22.0",

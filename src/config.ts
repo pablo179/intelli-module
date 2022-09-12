@@ -15,6 +15,8 @@ const appConfig = {
     env: getEnvVar('NODE_ENV'),
     populationLimit: 10,
     generationLimit: 3,
+    crossProbability: 0.8,
+    mutationProbability: 0.01,
 }
 
 export default appConfig

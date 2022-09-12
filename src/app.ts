@@ -1,8 +1,7 @@
 import { Props } from './interface'
 import config from './config'
-import { performance } from 'perf_hooks';
 
-const { populationLimit, generationLimit } = config
+const { populationLimit, generationLimit, crossProbability, mutationProbability } = config
 let products = []
 let limit
 let population = []
@@ -30,12 +29,13 @@ const getTotalEarnings = (individual) => {
 
 const createIndividual = () => {
     let individual
-    individual = new Array(products.length)
-        .fill(0)
-        .map(() => Math.round(Math.random()))
-    if (getTotalWeight(individual) > limit) {
-        individual = createIndividual()
-    }
+    do {
+        individual = []
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < products.length; i++) {
+            individual.push(Math.round(Math.random()))
+        }
+    } while (getTotalWeight(individual) > limit)
     return individual
 }
 
@@ -51,14 +51,19 @@ const createPairs = () => {
 }
 
 const crossPair = (firstIndividual, secondIndividual) => {
-    const crossPoint = Math.floor(Math.random() * firstIndividual.length)
-    const firstChild = firstIndividual
-        .slice(0, crossPoint)
-        .concat(secondIndividual.slice(crossPoint))
-    const secondChild = secondIndividual
-        .slice(0, crossPoint)
-        .concat(firstIndividual.slice(crossPoint))
-    return [firstChild, secondChild]
+    if (Math.random() < crossProbability) {
+        const crossPoint = Math.floor(Math.random() * firstIndividual.length)
+        const firstChild = [
+            ...firstIndividual.slice(0, crossPoint),
+            ...secondIndividual.slice(crossPoint),
+        ]
+        const secondChild = [
+            ...secondIndividual.slice(0, crossPoint),
+            ...firstIndividual.slice(crossPoint),
+        ]
+        return [firstChild, secondChild]
+    }
+    return [firstIndividual, secondIndividual]
 }
 
 const crossEachPair = () => {
@@ -71,14 +76,13 @@ const crossEachPair = () => {
 
 const mutation = (individual) => {
     const newIndividual = individual
-    newIndividual.forEach((value, index) => {
-        if (Math.random() < 0.1) {
-            newIndividual[index] = value === 0 ? 1 : 0
-        }
-    })
-    if (getTotalWeight(newIndividual) > limit) {
-        mutation(individual)
-    }
+    do {
+        newIndividual.forEach((value, index) => {
+            if (Math.random() < mutationProbability) {
+                newIndividual[index] = value === 0 ? 1 : 0
+            }
+        })
+    } while (getTotalWeight(newIndividual) > limit)
     return newIndividual
 }
 
@@ -100,7 +104,6 @@ const getBestIndividual = () => {
 }
 
 const intelliModule = (props: Props) => {
-    const startTime = performance.now()
     products = props.products
     limit = props.budget
     population = new Array(populationLimit)
@@ -117,8 +120,6 @@ const intelliModule = (props: Props) => {
         insertNewIndividuals()
     }
     const bestIndividual = getBestIndividual()
-    const endTime = performance.now()
-    console.log(`Call to doSomething took ${endTime - startTime} milliseconds`)
     return {
         bestIndividual,
         totalWeight: getTotalWeight(bestIndividual),
